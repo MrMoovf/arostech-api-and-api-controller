@@ -1,0 +1,17 @@
+{
+    "name": "arostech/api-and-api-controller",
+    "description": "Complete routing and controller surface for Laravel Apps in Aros Tech ecosystem",
+    "autoload": {
+        "psr-4": {
+            "Arostech\\Api\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MrMoovf",
+            "email": "anderskozuch1998@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

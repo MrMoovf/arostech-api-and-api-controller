@@ -6,15 +6,36 @@ use Illuminate\Support\Facades\Route;
 
 class ApiRouter{
     public static function run(){
-        // ------------------------- Public routes ----------------------
-        // ------------------------- Public routes ----------------------
-        // ------------------------- Public routes ----------------------
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
+        ############ DETTE ER DEN MEST UPDATEREDE API ################
 
+
+        // ------------------------- Public routes ----------------------
+        // ------------------------- Public routes ----------------------
+        // ------------------------- Public routes ----------------------
         // ------------------ USERS -- API
         Route::post('/v1/users',[ApiController::class, 'usersPost']);
         Route::post('/v1/authenticate',[ApiController::class,'authenticate']);
 
-        
         // ------------------------- Protected routes ----------------------
         // ------------------------- Protected routes ----------------------
         // ------------------------- Protected routes ----------------------

@@ -2,7 +2,7 @@
 namespace Arostech\Api;  
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArosTechApiController;
+use Arostech\Api\ApiController;
 
 class ApiRouter{
     public static function run(){
@@ -33,49 +33,49 @@ class ApiRouter{
         // ------------------------- Public routes ----------------------
         // ------------------------- Public routes ----------------------
         // ------------------ USERS -- API
-        Route::post('/v1/users',[ArosTechApiController::class, 'usersPost']);
-        Route::post('/v1/authenticate',[ArosTechApiController::class,'authenticate']);
+        Route::post('/v1/users',[ApiController::class, 'usersPost']);
+        Route::post('/v1/authenticate',[ApiController::class,'authenticate']);
 
         // ------------------------- Protected routes ----------------------
         // ------------------------- Protected routes ----------------------
         // ------------------------- Protected routes ----------------------
         Route::group(['middleware' => ['auth:sanctum']], function (){
             // Users
-            Route::post('/v1/logout',[ArosTechApiController::class,'logout']);
+            Route::post('/v1/logout',[ApiController::class,'logout']);
 
             // Content
-            Route::get('/v1/content', [ArosTechApiController::class,'contentGet']);
-            Route::get('/v1/content/{id}',[ArosTechApiController::class, 'contentGetId']);
-            Route::post('/v1/content',[ArosTechApiController::class,'contentPost']);
-            Route::put('/v1/content/{id}',[ArosTechApiController::class, 'contentPut']);    
-            Route::delete('/v1/content/{id}',[ArosTechApiController::class,'contentDelete']);
+            Route::get('/v1/content', [ApiController::class,'contentGet']);
+            Route::get('/v1/content/{id}',[ApiController::class, 'contentGetId']);
+            Route::post('/v1/content',[ApiController::class,'contentPost']);
+            Route::put('/v1/content/{id}',[ApiController::class, 'contentPut']);    
+            Route::delete('/v1/content/{id}',[ApiController::class,'contentDelete']);
 
 
             // Messages
-            Route::get('/v1/messages',[ArosTechApiController::class, 'messagesGet']);
-            Route::put('/v1/messages/{message}',[ArosTechApiController::class, 'messagesPut']);
+            Route::get('/v1/messages',[ApiController::class, 'messagesGet']);
+            Route::put('/v1/messages/{message}',[ApiController::class, 'messagesPut']);
 
             // Testimonials
-            Route::get('/v1/testimonials',[ArosTechApiController::class,'testimonialsGet']);
-            Route::post('/v1/testimonials', [ArosTechApiController::class,'testimonialsPost']);
-            Route::get('/v1/testimonials/{testimonial}',[ArosTechApiController::class,'testimonialsGetId']);
-            Route::put('/v1/testimonials/{testimonial}',  [ArosTechApiController::class,'testimonialsPut']);
+            Route::get('/v1/testimonials',[ApiController::class,'testimonialsGet']);
+            Route::post('/v1/testimonials', [ApiController::class,'testimonialsPost']);
+            Route::get('/v1/testimonials/{testimonial}',[ApiController::class,'testimonialsGetId']);
+            Route::put('/v1/testimonials/{testimonial}',  [ApiController::class,'testimonialsPut']);
 
             // Emails
-            Route::get('/v1/emails',[ArosTechApiController::class,'emailsGet']);
+            Route::get('/v1/emails',[ApiController::class,'emailsGet']);
 
             // Images
-            Route::get('/v1/images',[ArosTechApiController::class,'imagesGet']);
-            Route::post('/v1/images',[ArosTechApiController::class,'imagesPost']);
-            Route::get('/v1/images/{image}',[ArosTechApiController::class,'imagesShow']);
-            Route::put('/v1/images/{image}',[ArosTechApiController::class,'imagesPut']);
-            Route::delete('/v1/images/{image}',[ArosTechApiController::class,'imagesDelete']);
+            Route::get('/v1/images',[ApiController::class,'imagesGet']);
+            Route::post('/v1/images',[ApiController::class,'imagesPost']);
+            Route::get('/v1/images/{image}',[ApiController::class,'imagesShow']);
+            Route::put('/v1/images/{image}',[ApiController::class,'imagesPut']);
+            Route::delete('/v1/images/{image}',[ApiController::class,'imagesDelete']);
 
             // Analytics
-            Route::get('/v1/analytics',[ArosTechApiController::class,'analyticsGet']);
+            Route::get('/v1/analytics',[ApiController::class,'analyticsGet']);
 
             // Processed analytics
-            Route::get('/v1/processed-analytics',[ArosTechApiController::class,'processedAnalyticsGet']);
+            Route::get('/v1/processed-analytics',[ApiController::class,'processedAnalyticsGet']);
 
         });
 

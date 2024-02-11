@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Arostech\Api;
 
 use App\Models\Content;
 use App\Models\Emailsubscriber;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 
 
-class ArosTechApiController extends Controller
+class ApiController extends Controller
 {
 
 

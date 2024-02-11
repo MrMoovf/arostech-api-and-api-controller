@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 
 
-class ApiController extends Controller
+class ArosTechApiController extends Controller
 {
 
 

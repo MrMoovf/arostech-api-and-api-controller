@@ -1,8 +1,8 @@
 <?php
 namespace Arostech\Api;
 
-use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
+use Arostech\Api\ApiController;
 
 class ApiRouter{
     public static function run(){

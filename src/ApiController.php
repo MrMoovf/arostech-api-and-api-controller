@@ -1,6 +1,6 @@
 <?php
 
-namespace Arostech\Api;
+namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Emailsubscriber;

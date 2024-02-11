@@ -2,7 +2,7 @@
 namespace Arostech\Api;  
 
 use Illuminate\Support\Facades\Route;
-use Arostech\Api\ApiController;
+use App\Http\Controllers\ApiController;
 
 class ApiRouter{
     public static function run(){

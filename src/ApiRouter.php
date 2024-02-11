@@ -1,5 +1,5 @@
 <?php
-namespace Arostech\Api;
+namespace Arostech\Api;  
 
 use Illuminate\Support\Facades\Route;
 use Arostech\Api\ApiController;

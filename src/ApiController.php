@@ -2,6 +2,7 @@
 
 namespace Arostech\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Content;
 use App\Models\Emailsubscriber;
 use App\Models\Image;

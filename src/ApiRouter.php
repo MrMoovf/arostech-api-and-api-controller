@@ -32,9 +32,13 @@ class ApiRouter{
         // ------------------------- Public routes ----------------------
         // ------------------------- Public routes ----------------------
         // ------------------------- Public routes ----------------------
-        // ------------------ USERS -- API
+        // ------------------ USERS
         Route::post('/v1/users',[ApiController::class, 'usersPost']);
         Route::post('/v1/authenticate',[ApiController::class,'authenticate']);
+
+        // ------------------ CONTENT
+        Route::get('/v1/content', [ApiController::class,'contentGet']);
+
 
         // ------------------------- Protected routes ----------------------
         // ------------------------- Protected routes ----------------------
@@ -44,7 +48,6 @@ class ApiRouter{
             Route::post('/v1/logout',[ApiController::class,'logout']);
 
             // Content
-            Route::get('/v1/content', [ApiController::class,'contentGet']);
             Route::get('/v1/content/{id}',[ApiController::class, 'contentGetId']);
             Route::post('/v1/content',[ApiController::class,'contentPost']);
             Route::put('/v1/content/{id}',[ApiController::class, 'contentPut']);    

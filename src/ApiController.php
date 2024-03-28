@@ -139,6 +139,47 @@ class ApiController extends Controller
         return 'yesyes';
     }
 
+
+    public function contentBatchPut(Request $request){
+        $formFields = $request->validate([
+            'finalChanges' => 'required',
+            'username' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        // Check that username and password match
+        if($formFields['username'] != 'Arostech'){
+            return response('Unauthorized',401);
+        }
+        if($formFields['password'] != 'Arostech'){
+            return response('Unauthorized',401);
+        }
+
+
+        // For each of the final changes, update the ID-associated row.
+        $finalChanges = $formFields['finalChanges'];
+
+
+        // for each
+        foreach ($finalChanges as $change) {
+            $content = Content::find($change['id']);
+
+            if(!$content){
+                return response('Content not found',404);
+            }
+            $content->data = $change['content'];
+            $content->update();
+        }
+        
+
+        // in theory upsert should look like this:
+        // Content::upsert($finalChanges, ['id'],['data']);
+
+
+
+    }
+
+    // Delete content with ID
     public function contentDelete(Request $request, Content $id){
         $formFields = $request->validate([
             'password' => 'required'

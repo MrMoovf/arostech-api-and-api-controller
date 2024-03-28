@@ -54,6 +54,10 @@ class ApiRouter{
             Route::delete('/v1/content/{id}',[ApiController::class,'contentDelete']);
 
 
+            Route::put('/v1/content/batch',[ApiController::class, 'contentBatchPut']);    
+
+
+
             // Messages
             Route::get('/v1/messages',[ApiController::class, 'messagesGet']);
             Route::put('/v1/messages/{message}',[ApiController::class, 'messagesPut']);

@@ -38,6 +38,8 @@ class ApiRouter{
 
         // ------------------ CONTENT
         Route::get('/v1/content', [ApiController::class,'contentGet']);
+        Route::put('/v1/content/batch',[ApiController::class, 'contentBatchPut']);    
+
 
 
         // ------------------------- Protected routes ----------------------
@@ -54,7 +56,6 @@ class ApiRouter{
             Route::delete('/v1/content/{id}',[ApiController::class,'contentDelete']);
 
 
-            Route::put('/v1/content/batch',[ApiController::class, 'contentBatchPut']);    
 
 
 

@@ -160,6 +160,8 @@ class ApiController extends Controller
         $finalChanges = $formFields['finalChanges'];
 
 
+
+        // return $finalChanges;
         // for each
         foreach ($finalChanges as $change) {
             $content = Content::find($change['id']);
@@ -168,15 +170,12 @@ class ApiController extends Controller
                 return response('Content not found',404);
             }
             $content->data = $change['content'];
-            $content->update();
+            if(!$content->save()){
+                return response('Error saving ID: '.$content->id,404);
+            }
         }
-        
 
-        // in theory upsert should look like this:
-        // Content::upsert($finalChanges, ['id'],['data']);
-
-
-
+        return response('All good!',200);
     }
 
     // Delete content with ID

@@ -159,10 +159,10 @@ class ApiController extends Controller
 
         // Check that username and password match
         if($formFields['username'] != 'Arostech'){
-            return response('Unauthorized',401);
+            return response('Unauthorized, wrong username',401);
         }
         if($formFields['password'] != 'Arostech'){
-            return response('Unauthorized',401);
+            return response('Unauthorized, wrong password',401);
         }
 
 

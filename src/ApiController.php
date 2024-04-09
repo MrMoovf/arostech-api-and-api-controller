@@ -24,6 +24,7 @@ use Arostech\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 
 
@@ -159,10 +160,10 @@ class ApiController extends Controller
 
         // Check that username and password match
         if($formFields['username'] != 'Arostech'){
-            return response('Unauthorized, wrong username',401);
+            return response('Unauthorized in controller',401);
         }
         if($formFields['password'] != 'Arostech'){
-            return response('Unauthorized, wrong password',401);
+            return response('Unauthorized in controller',401);
         }
 
 
@@ -185,7 +186,24 @@ class ApiController extends Controller
             }
         }
 
-        return response('All good!',200);
+
+        // Creating new deployment in Vercel!
+        // Removed this: withOptions(['verify',false])->
+        $res = Http::withHeaders([
+            'Authorization' => 'Bearer '. env('VERCEL_FRONTEND_TOKEN'),
+            'Content-Type' => 'application/json'
+        ])->post('https://api.vercel.com/v13/deployments',[
+            'name' => env('VERCEL_FRONTEND_NAME'),
+            'deploymentId' => env('VERCEL_FRONTEND_DEPLOYMENT_ID'),
+            'target' => 'production'
+        ]);
+        if($res->successful()){
+            return response('we did it wow',200);
+        }
+        else{
+            // echo $res->body();
+            return response('Error trying to create new deployment on Vercel',500);
+        }
     }
 
     // Delete content with ID

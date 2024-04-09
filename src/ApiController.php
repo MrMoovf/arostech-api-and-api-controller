@@ -189,20 +189,24 @@ class ApiController extends Controller
 
         // Creating new deployment in Vercel!
         // Removed this: withOptions(['verify',false])->
-        $res = Http::withHeaders([
-            'Authorization' => 'Bearer '. env('VERCEL_FRONTEND_TOKEN'),
-            'Content-Type' => 'application/json'
-        ])->post('https://api.vercel.com/v13/deployments',[
-            'name' => env('VERCEL_FRONTEND_NAME'),
-            'deploymentId' => env('VERCEL_FRONTEND_DEPLOYMENT_ID'),
-            'target' => 'production'
-        ]);
-        if($res->successful()){
-            return response('we did it wow',200);
-        }
-        else{
-            // echo $res->body();
-            return response('Error trying to create new deployment on Vercel',500);
+        if(env('IS_NEXT_JS_APP')){
+            $res = Http::withHeaders([
+                'Authorization' => 'Bearer '. env('VERCEL_FRONTEND_TOKEN'),
+                'Content-Type' => 'application/json'
+            ])->post('https://api.vercel.com/v13/deployments',[
+                'name' => env('VERCEL_FRONTEND_NAME'),
+                'deploymentId' => env('VERCEL_FRONTEND_DEPLOYMENT_ID'),
+                'target' => 'production'
+            ]);
+            if($res->successful()){
+                return response('we did it wow',200);
+            }
+            else{
+                // echo $res->body();
+                return response('Error trying to create new deployment on Vercel',500);
+            }
+        } else {
+            return response('Not Next.js app, so all good',200);
         }
     }
 

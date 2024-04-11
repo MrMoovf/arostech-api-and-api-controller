@@ -61,6 +61,7 @@ class ApiRouter{
 
             // Messages
             Route::get('/v1/messages',[ApiController::class, 'messagesGet']);
+            Route::post('/v1/messages',[ApiController::class,'messagesPost']);
             Route::put('/v1/messages/{message}',[ApiController::class, 'messagesPut']);
 
             // Testimonials

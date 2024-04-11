@@ -252,6 +252,32 @@ class ApiController extends Controller
         return Message::all();
     }
 
+    public function messagesPost(Request $request){
+        $formFields = $request->validate([
+            'email' => 'required|email',
+            'name' => 'string',
+            'msg' => 'string',
+        ]);
+
+        echo $formFields;
+
+
+
+        // Indsætter status på besked
+        $message = Message::create($formFields);
+        echo $message;
+
+        return response($formFields,200);
+
+        // // Bekræftelsesmail til kunden
+        // Mail::to($formFields['email'])->send(new KontaktMail($formFields['email'], $formFields['name'], $formFields['msg']));
+
+        // // Den faktiske mail til Charlotte -- HUsk at ændre til kontakt@kropssind.dk
+        // Mail::to('kontakt@kropssind.dk')->send(new KontaktMailFirma($formFields['email'], $formFields['name'], $formFields['msg']));
+        
+
+    }
+
     // Update specific message
     public function messagesPut(Message $message){
         switch ($message->status) {

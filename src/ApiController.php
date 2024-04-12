@@ -3,6 +3,8 @@
 namespace Arostech\Api;
 
 use App\Http\Controllers\Controller;
+use Arostech\Mail\MessageCustomer;
+use Arostech\Mail\MessageOwner;
 // use App\Models\Content;
 // use App\Models\Emailsubscriber;
 // use App\Models\Image;
@@ -25,7 +27,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Mail;
 
 
 class ApiController extends Controller

@@ -255,26 +255,40 @@ class ApiController extends Controller
     public function messagesPost(Request $request){
         $formFields = $request->validate([
             'email' => 'required|email',
-            'name' => 'string',
-            'msg' => 'string',
+            'name' => 'required|string',
+            'msg' => 'required|string',
+            'username' => 'required|string',
+            'password'=>'required|string'
         ]);
 
-        echo $formFields;
-
-
+        if($formFields['username'] != env('AROSTECH_USERNAME')){
+            return response('Unauthorized in controller',500);
+        }
+        if($formFields['password'] != env('AROSTECH_PASSWORD')){
+            return response('Unauthorized in controller',500);
+        }
 
         // Indsætter status på besked
         $message = Message::create($formFields);
-        echo $message;
 
-        return response($formFields,200);
+        $data = [
+            'email' => $formFields['email'],
+            'name' => $formFields['name'],
+            'msg' => $formFields['msg']
+        ];
 
-        // // Bekræftelsesmail til kunden
-        // Mail::to($formFields['email'])->send(new KontaktMail($formFields['email'], $formFields['name'], $formFields['msg']));
 
-        // // Den faktiske mail til Charlotte -- HUsk at ændre til kontakt@kropssind.dk
-        // Mail::to('kontakt@kropssind.dk')->send(new KontaktMailFirma($formFields['email'], $formFields['name'], $formFields['msg']));
-        
+        $mailToOwner = Mail::to(env('MAIL_OWNERS_EMAIL'))->send(new MessageOwner($data['email'],$data['name'],$data['msg']));
+        if(!$mailToOwner){
+            return response('Error: Email to owner was not sent. Please contact your Aros Tech administrator',500);
+        }
+
+        $mailToCustomer = Mail::to($data['email'])->send(new MessageCustomer($data['email'],$data['name'],$data['msg']));
+        if(!$mailToCustomer){
+            return response('Error: Email to customer was not sent. Please contact your Aros Tech administrator',500);
+        }
+
+        return response($message,200);
 
     }
 

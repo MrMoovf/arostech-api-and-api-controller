@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Arostech\Mail\MessageCustomer;
 use Arostech\Mail\MessageOwner;
 
-#listen this should work!!
 use Arostech\Models\Content;
 use Arostech\Models\Emailsubscriber;
 use Arostech\Models\Image;

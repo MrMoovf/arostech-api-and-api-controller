@@ -24,6 +24,6 @@ class ApiServiceProvider extends ServiceProvider
         echo 'Hi there, I should be working -- FROM API Service Provider!';
         echo 'Hi there, I should be working -- FROM API Service Provider!';
         echo 'Hi there, I should be working -- FROM API Service Provider!';
-        $this->loadRoutesFrom(__DIR__.'routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/api.php');
     }
 }

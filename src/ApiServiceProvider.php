@@ -4,7 +4,7 @@ namespace Arostech\Api;
 
 use Illuminate\Support\ServiceProvider;
 
-class ApiServiceProvider extends ServiceProvider
+class ApiServiceProvider  extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -12,6 +12,7 @@ class ApiServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        
     }
 
     /**
@@ -20,5 +21,6 @@ class ApiServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // 
+        echo __DIR__.'/routes/api.php';
     }
 }

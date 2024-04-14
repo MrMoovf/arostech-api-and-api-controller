@@ -10,15 +10,15 @@ use Arostech\Api\ApiController;
 // ------------------------- Public routes ----------------------
 // ------------------------- Public routes ----------------------
 // ------------------ USERS
-Route::post('/v1/users',[ApiController::class, 'usersPost']);
-Route::post('/v1/authenticate',[ApiController::class,'authenticate']);
+Route::post('/api/v1/users',[ApiController::class, 'usersPost']);
+Route::post('/api/v1/authenticate',[ApiController::class,'authenticate']);
 
 // ------------------ CONTENT
-Route::get('/v1/content', [ApiController::class,'contentGet']);
-Route::put('/v1/content/batch',[ApiController::class, 'contentBatchPut']);    
+Route::get('/api/v1/content', [ApiController::class,'contentGet']);
+Route::put('/api/v1/content/batch',[ApiController::class, 'contentBatchPut']);    
 
 // ------------------ MESSAGES
-Route::post('/v1/messages',[ApiController::class,'messagesPost']);
+Route::post('/api/v1/messages',[ApiController::class,'messagesPost']);
 
 
 
@@ -28,39 +28,39 @@ Route::post('/v1/messages',[ApiController::class,'messagesPost']);
 // ------------------------- Protected routes ----------------------
 Route::group(['middleware' => ['auth:sanctum']], function (){
     // Users
-    Route::post('/v1/logout',[ApiController::class,'logout']);
+    Route::post('/api/v1/logout',[ApiController::class,'logout']);
 
     // Content
-    Route::get('/v1/content/{id}',[ApiController::class, 'contentGetId']);
-    Route::post('/v1/content',[ApiController::class,'contentPost']);
-    Route::put('/v1/content/{id}',[ApiController::class, 'contentPut']);    
-    Route::delete('/v1/content/{id}',[ApiController::class,'contentDelete']);
+    Route::get('/api/v1/content/{id}',[ApiController::class, 'contentGetId']);
+    Route::post('/api/v1/content',[ApiController::class,'contentPost']);
+    Route::put('/api/v1/content/{id}',[ApiController::class, 'contentPut']);    
+    Route::delete('/api/v1/content/{id}',[ApiController::class,'contentDelete']);
 
 
     // Messages
-    Route::get('/v1/messages',[ApiController::class, 'messagesGet']);
-    Route::put('/v1/messages/{message}',[ApiController::class, 'messagesPut']);
+    Route::get('/api/v1/messages',[ApiController::class, 'messagesGet']);
+    Route::put('/api/v1/messages/{message}',[ApiController::class, 'messagesPut']);
 
     // Testimonials
-    Route::get('/v1/testimonials',[ApiController::class,'testimonialsGet']);
-    Route::post('/v1/testimonials', [ApiController::class,'testimonialsPost']);
-    Route::get('/v1/testimonials/{testimonial}',[ApiController::class,'testimonialsGetId']);
-    Route::put('/v1/testimonials/{testimonial}',  [ApiController::class,'testimonialsPut']);
+    Route::get('/api/v1/testimonials',[ApiController::class,'testimonialsGet']);
+    Route::post('/api/v1/testimonials', [ApiController::class,'testimonialsPost']);
+    Route::get('/api/v1/testimonials/{testimonial}',[ApiController::class,'testimonialsGetId']);
+    Route::put('/api/v1/testimonials/{testimonial}',  [ApiController::class,'testimonialsPut']);
 
     // Emails
-    Route::get('/v1/emails',[ApiController::class,'emailsGet']);
+    Route::get('/api/v1/emails',[ApiController::class,'emailsGet']);
 
     // Images
-    Route::get('/v1/images',[ApiController::class,'imagesGet']);
-    Route::post('/v1/images',[ApiController::class,'imagesPost']);
-    Route::get('/v1/images/{image}',[ApiController::class,'imagesShow']);
-    Route::put('/v1/images/{image}',[ApiController::class,'imagesPut']);
-    Route::delete('/v1/images/{image}',[ApiController::class,'imagesDelete']);
+    Route::get('/api/v1/images',[ApiController::class,'imagesGet']);
+    Route::post('/api/v1/images',[ApiController::class,'imagesPost']);
+    Route::get('/api/v1/images/{image}',[ApiController::class,'imagesShow']);
+    Route::put('/api/v1/images/{image}',[ApiController::class,'imagesPut']);
+    Route::delete('/api/v1/images/{image}',[ApiController::class,'imagesDelete']);
 
     // Analytics
-    Route::get('/v1/analytics',[ApiController::class,'analyticsGet']);
+    Route::get('/api/v1/analytics',[ApiController::class,'analyticsGet']);
 
     // Processed analytics
-    Route::get('/v1/processed-analytics',[ApiController::class,'processedAnalyticsGet']);
+    Route::get('/api/v1/processed-analytics',[ApiController::class,'processedAnalyticsGet']);
 
 });

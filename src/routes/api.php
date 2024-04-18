@@ -23,6 +23,7 @@ Route::post('/api/v1/messages',[ApiController::class,'messagesPost']);
 
 
 
+
 // ------------------------- Protected routes ----------------------
 // ------------------------- Protected routes ----------------------
 // ------------------------- Protected routes ----------------------

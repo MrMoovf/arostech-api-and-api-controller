@@ -137,7 +137,7 @@ class ApiController extends Controller
             $id->title = $formFields['title'];
             $id->page = $formFields['page'];
             if($id->save()){
-                return response('No picture found - successfully updated',200);
+                return response($id,200);
             }
             
         }

@@ -328,7 +328,8 @@ class ApiController extends Controller
     }
 
 
-    public function messagesDelete(Message $message){
+    public function messagesDelete($id){
+        $message = Message::find($id);
         if($message->delete()){
             return response('Message deleted',200);
         }

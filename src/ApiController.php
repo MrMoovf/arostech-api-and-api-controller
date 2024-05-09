@@ -206,7 +206,7 @@ class ApiController extends Controller
     }
 
     // Delete content with ID
-    public function contentDelete(Request $request, $id){
+    public function contentDelete(Request $request, $id){ 
         $id = Content::find($id);
         $formFields = $request->validate([
             'password' => 'required'

@@ -323,6 +323,19 @@ class ApiController extends Controller
         return Message::all();
 
     }
+
+
+    public function messagesDelete(Message $message){
+        if($message->delete()){
+            return response('Message deleted',200);
+        }
+        else{
+            return response('Error deleting message',500);
+        }
+
+    }
+
+
     // -------------------------------------------- TESTIMONIALS ---------------------------------------------
     // -------------------------------------------- TESTIMONIALS ---------------------------------------------
     // -------------------------------------------- TESTIMONIALS ---------------------------------------------

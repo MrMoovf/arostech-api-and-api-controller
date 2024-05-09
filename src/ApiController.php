@@ -275,10 +275,10 @@ class ApiController extends Controller
             'password'=>'required|string'
         ]);
 
-        if($formFields['username'] != env('AROSTECH_USERNAME')){
+        if($formFields['username'] != 'Arostech'){
             return response('Unauthorized in controller',500);
         }
-        if($formFields['password'] != env('AROSTECH_PASSWORD')){
+        if($formFields['password'] != 'Arostech'){
             return response('Unauthorized in controller',500);
         }
 

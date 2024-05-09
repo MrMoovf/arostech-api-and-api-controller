@@ -142,7 +142,7 @@ class ApiController extends Controller
             }
             
         }
-        return 'yesyes';
+        return response('Server error at end of method',500);
     }
 
 

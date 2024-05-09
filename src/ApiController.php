@@ -207,6 +207,7 @@ class ApiController extends Controller
 
     // Delete content with ID
     public function contentDelete(Request $request, Content $id){
+        $id = Content::find($id);
         $formFields = $request->validate([
             'password' => 'required'
         ]);
@@ -222,7 +223,7 @@ class ApiController extends Controller
             return response('Content '. $id->id .' deleted successfully',200);
         }
         else{
-            return response('Error, something went wrong deleting, maybe the content doesnt exist', 400);
+            return response('Error, something went wrong deleting, maybe the content doesnt exist', 500);
         }
 
 

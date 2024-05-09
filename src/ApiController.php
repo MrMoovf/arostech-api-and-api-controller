@@ -307,18 +307,21 @@ class ApiController extends Controller
     }
 
     // Update specific message
-    public function messagesPut(Message $message){
+    public function messagesPut($id){
+        $message = Message::find($id);
+
+
         switch ($message->status) {
             case '1':
-                $data['status'] = '2';
+                $message->status = 2;
                 break;
             
             case '2':
-                $data['status'] = '1';
+                $message->status = 1;
                 break;
         }
+        $message->save();
         
-        $message->update($data);
 
         return Message::all();
 

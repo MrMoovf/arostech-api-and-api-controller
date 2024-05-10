@@ -416,6 +416,15 @@ class ApiController extends Controller
     // -------------------------------------------- USERS ---------------------------------------------
     // -------------------------------------------- USERS ---------------------------------------------
 
+
+    public function usersGet(){
+        return response(User::all());
+    }
+
+    public function usersGetSingle($id){
+        return response(User::find($id));
+    }
+
     // Register new user in users table
     public function usersPost(Request $request){
         $formFields = $request->validate([
@@ -622,26 +631,24 @@ class ApiController extends Controller
     }
 
     // Log exit requests -- not in use currently
-    public function logRequest(Request $request){
-        try {
-            ModelsRequest::create([
-                'log_type' => 'pageview',
-                'route' => $request->path(),
-                'useragent' => $request->userAgent(),
-                'visitor_id' => crypt($request->userAgent() . $request->ip(),'123'),
-                'action_type' => 'exit',
-                'referer' => request()->header('referer') ?? 'wasNull'
-            ]);
-        } catch (\Throwable $th) {
-            // throw $th;
-        }
-    }
+    // public function logRequest(Request $request){
+    //     try {
+    //         ModelsRequest::create([
+    //             'log_type' => 'pageview',
+    //             'route' => $request->path(),
+    //             'useragent' => $request->userAgent(),
+    //             'visitor_id' => crypt($request->userAgent() . $request->ip(),'123'),
+    //             'action_type' => 'exit',
+    //             'referer' => request()->header('referer') ?? 'wasNull'
+    //         ]);
+    //     } catch (\Throwable $th) {
+    //         // throw $th;
+    //     }
+    // }
 
     // Processed analytics get
-
     public function processedAnalyticsGet(){
         return Processedanalytic::latest()->first();
-
     }
 
 

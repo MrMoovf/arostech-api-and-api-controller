@@ -282,7 +282,7 @@ class ApiController extends Controller
             return response('Unauthorized in controller',500);
         }
 
-        // Indsætter status på besked
+        // Indsætter status på besked 
         $message = Message::create($formFields);
 
         $data = [

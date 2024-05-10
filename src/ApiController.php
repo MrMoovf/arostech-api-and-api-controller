@@ -275,10 +275,10 @@ class ApiController extends Controller
             'password'=>'required|string'
         ]);
 
-        if($formFields['username'] != 'Arostech'){
+        if($formFields['username'] != config('arostech-mail.arostech_username')){
             return response('Unauthorized in controller',500);
         }
-        if($formFields['password'] != 'Arostech'){
+        if($formFields['password'] != config('arostech-mail.arostech_password')){
             return response('Unauthorized in controller',500);
         }
 
@@ -292,7 +292,7 @@ class ApiController extends Controller
         ];
 
 
-        $mailToOwner = Mail::to(env('MAIL_OWNERS_EMAIL'))->send(new MessageOwner($data['email'],$data['name'],$data['msg']));
+        $mailToOwner = Mail::to(config('arostech-mail.app_owners_email'))->send(new MessageOwner($data['email'],$data['name'],$data['msg']));
         if(!$mailToOwner){
             return response('Error: Email to owner was not sent. Please contact your Aros Tech administrator',500);
         }

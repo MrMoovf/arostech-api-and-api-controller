@@ -399,8 +399,6 @@ class ApiController extends Controller
         return $testimonial;
     }
 
-    
-
     // Update content with ID
     public function testimonialsPut($id, Request $request){
 
@@ -433,6 +431,15 @@ class ApiController extends Controller
 
         // Return 
         return $item;
+    }
+
+    public function testimonialsDelete($id){
+        $testimonial = Testimonial::find($id);
+        if($testimonial->delete()){
+            return response('Testimonial deleted',200);
+        } else{
+            return response('Error deleting testimonial');
+        }
     }
 
     // -------------------------------------------- USERS ---------------------------------------------

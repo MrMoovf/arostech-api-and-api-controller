@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/api/v1/testimonials', [ApiController::class,'testimonialsPost']);
     Route::get('/api/v1/testimonials/{testimonial}',[ApiController::class,'testimonialsGetId']);
     Route::put('/api/v1/testimonials/{testimonial}',  [ApiController::class,'testimonialsPut']);
+    Route::delete('/api/v1/testimonials/{testimonial}',  [ApiController::class,'testimonialsDelete']);
 
     // Emails
     Route::get('/api/v1/emails',[ApiController::class,'emailsGet']);

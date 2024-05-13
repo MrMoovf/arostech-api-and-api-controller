@@ -615,15 +615,18 @@ class ApiController extends Controller
 
     }
 
-    public function imagesDelete(Image $image, Request $request){
+    public function imagesDelete($id, Request $request){
         $user = Auth::user();
+
+        $image = Image::find($id);
+
         if($image->is_deleted != 0){
             return response('Error: image has been deleted',404);
         }
         $formFields = $request->validate([
-            'name' => 'string|required',
             'password' => 'string|required',
         ]);
+
         if($formFields['password'] != 'Arostech'){
             return response('Delete not allowed', 401);
         }
@@ -644,21 +647,6 @@ class ApiController extends Controller
 
         return $image;
 
-        // CODE FOR HARD DELETING
-        // // Setting path to image in the public images folder
-        // $path = 'public/images/'.$image->name_extension;
-
-        // if(Storage::delete($path)){
-        //     if($image->delete()){
-        //         return response('Model deleted successfully',200);
-        //     }
-        //     else{
-        //         return response('Error: Image deleted but model still in database',500);
-        //     }
-        // }
-        // else{
-        //     return response('Error deleting image; was probably not found',500);
-        // }
         
     }
 

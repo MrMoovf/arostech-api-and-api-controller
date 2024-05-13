@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     // Testimonials
     Route::get('/api/v1/testimonials',[ApiController::class,'testimonialsGet']);
     Route::post('/api/v1/testimonials', [ApiController::class,'testimonialsPost']);
-    Route::get('/api/v1/testimonials/{testimonial}',[ApiController::class,'testimonialsGetId']);
+    Route::get('/api/v1/testimonials/{id}',[ApiController::class,'testimonialsGetId']);
     Route::put('/api/v1/testimonials/{testimonial}',  [ApiController::class,'testimonialsPut']);
     Route::delete('/api/v1/testimonials/{testimonial}',  [ApiController::class,'testimonialsDelete']);
 

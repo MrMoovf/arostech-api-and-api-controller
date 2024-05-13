@@ -371,12 +371,12 @@ class ApiController extends Controller
 
     // Get all testimonials
     public function testimonialsGet(){
-        return Testimonial::all();
+        return response(Testimonial::all(),200);
     }
 
     // Get specific testimonial
     public function testimonialsGetId($id){
-        return Testimonial::find($id);
+        return response(Testimonial::find($id),200);
     }
 
     // POST new testimonial to the DB

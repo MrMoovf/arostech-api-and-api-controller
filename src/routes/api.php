@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::get('/api/v1/users',[ApiController::class,'usersGet']);
     Route::get('/api/v1/users/{id}',[ApiController::class,'usersGetSingle']);
     Route::post('/api/v1/logout',[ApiController::class,'logout']);
+    Route::delete('/api/v1/users/{id}',[ApiController::class,'usersDelete']);
 
     // Content
     Route::get('/api/v1/content/{id}',[ApiController::class, 'contentGetId']);

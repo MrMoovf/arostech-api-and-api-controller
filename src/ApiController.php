@@ -483,6 +483,15 @@ class ApiController extends Controller
 
     }
 
+    public function usersDelete($id){
+        $user = User::find($id);
+        if($user->delete()){
+            return response('User with id: '.$id.' was deleted succesfully',200);
+        } else {
+            return response('Error. User was not deleted.',500);
+        }
+    }
+
     public function authenticate(Request $request){
         $formFields = $request->validate([
             'email' => 'required|string|email',
@@ -661,21 +670,6 @@ class ApiController extends Controller
         return ModelsRequest::all();
     }
 
-    // Log exit requests -- not in use currently
-    // public function logRequest(Request $request){
-    //     try {
-    //         ModelsRequest::create([
-    //             'log_type' => 'pageview',
-    //             'route' => $request->path(),
-    //             'useragent' => $request->userAgent(),
-    //             'visitor_id' => crypt($request->userAgent() . $request->ip(),'123'),
-    //             'action_type' => 'exit',
-    //             'referer' => request()->header('referer') ?? 'wasNull'
-    //         ]);
-    //     } catch (\Throwable $th) {
-    //         // throw $th;
-    //     }
-    // }
 
     // Processed analytics get
     public function processedAnalyticsGet(){

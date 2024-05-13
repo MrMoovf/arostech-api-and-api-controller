@@ -464,8 +464,9 @@ class ApiController extends Controller
             'password' => 'required|string',
             'organisation' => 'required|string',
             'organisation_url' => 'required|string',
+            'authorization' => '',
             'apiEmail' => 'required|string|email',
-            'apiPassword' => 'required|string'
+            'apiPassword' => 'required|string',
         ]);
 
         $apiPassword = array_pop($formFields);

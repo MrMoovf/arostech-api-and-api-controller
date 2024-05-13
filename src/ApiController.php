@@ -253,7 +253,10 @@ class ApiController extends Controller
     // -------------------------------------------- EMAILS ---------------------------------------------
     // -------------------------------------------- EMAILS ---------------------------------------------
     public function emailsGet(){
-        return Emailsubscriber::all();
+        return response(Emailsubscriber::all());
+    }
+    public function emailsGetSingle($id){
+        return response(Emailsubscriber::find($id));
     }
 
     public function emailsPost(Request $request){
@@ -265,6 +268,12 @@ class ApiController extends Controller
         $emailSubscriber = Emailsubscriber::create($formFields);
 
         return response($emailSubscriber,201);
+    }
+
+    public function emailsDelete($id){
+        $emailSubscriber = Emailsubscriber::find($id);
+        $emailSubscriber->delete();
+        return response('Emailsubscriber deleted',200);
     }
     //
     // -------------------------------------------- MESSAGES ---------------------------------------------

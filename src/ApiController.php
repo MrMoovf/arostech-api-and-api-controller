@@ -283,7 +283,11 @@ class ApiController extends Controller
 
     // Get all messages
     public function messagesGet(){
-        return Message::all();
+        return response(Message::all(),200);
+    }
+
+    public function messagesGetSingle($id){
+        return reponse(Message::find($id),200);
     }
 
     public function messagesPost(Request $request){

@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
 
     // Messages
     Route::get('/api/v1/messages',[ApiController::class, 'messagesGet']);
+    Route::get('/api/v1/messages/{id}',[ApiController::class, 'messagesGetSingle']);
     Route::put('/api/v1/messages/{message}',[ApiController::class, 'messagesPut']);
     Route::delete('/api/v1/messages/{message}',[ApiController::class, 'messagesDelete']);
 

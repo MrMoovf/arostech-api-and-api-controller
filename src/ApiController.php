@@ -264,7 +264,7 @@ class ApiController extends Controller
 
         $emailSubscriber = Emailsubscriber::create($formFields);
 
-        return response($emailSubscriber,200);
+        return response($emailSubscriber,201);
     }
     //
     // -------------------------------------------- MESSAGES ---------------------------------------------

@@ -450,7 +450,7 @@ class ApiController extends Controller
 
     public function usersGet(){
         return response(User::all());
-    }
+    } 
 
     public function usersGetSingle($id){
         return response(User::find($id));

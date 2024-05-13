@@ -255,6 +255,17 @@ class ApiController extends Controller
     public function emailsGet(){
         return Emailsubscriber::all();
     }
+
+    public function emailsPost(Request $request){
+        $formFields = $request->validate([
+            'consent' => 'required|boolean',
+            'email' => 'required|email|string'
+        ]);
+
+        $emailSubscriber = Emailsubscriber::create($formFields);
+
+        return response($emailSubscriber,200);
+    }
     //
     // -------------------------------------------- MESSAGES ---------------------------------------------
     // -------------------------------------------- MESSAGES ---------------------------------------------

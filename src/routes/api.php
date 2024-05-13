@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
 
     // Emails
     Route::get('/api/v1/emails',[ApiController::class,'emailsGet']);
+    Route::post('/api/v1/emails',[ApiController::class,'emailsPost']);
 
     // Images
     Route::get('/api/v1/images',[ApiController::class,'imagesGet']);

@@ -287,7 +287,7 @@ class ApiController extends Controller
     }
 
     public function messagesGetSingle($id){
-        return reponse(Message::find($id),200);
+        return response(Message::find($id),200);
     }
 
     public function messagesPost(Request $request){

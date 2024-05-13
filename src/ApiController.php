@@ -574,7 +574,8 @@ class ApiController extends Controller
 
     }
 
-    public function imagesShow(Image $image){
+    public function imagesShow($id){
+        $image = Image::find($id);
         if($image->is_deleted == 0){
             return $image;
         }
@@ -582,7 +583,8 @@ class ApiController extends Controller
 
     }
 
-    public function imagesPut(Image $image, Request $request){
+    public function imagesPut($id, Request $request){
+        $image = Image::find($id);
         if($image->is_deleted != 0){
             return response('Error: image has been deleted',404);
         }
@@ -591,6 +593,9 @@ class ApiController extends Controller
             'caption' => 'required|string',
             'alt_text' => 'required|string',
         ]);
+        if(!$image){
+            return response('Image not found',404);
+        }
         // getting and setting user id
         $user = Auth::user();
         $formFields['last_updated_by_user'] = $user->id;

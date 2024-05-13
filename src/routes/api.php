@@ -70,8 +70,8 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     // Images
     Route::get('/api/v1/images',[ApiController::class,'imagesGet']);
     Route::post('/api/v1/images',[ApiController::class,'imagesPost']);
-    Route::get('/api/v1/images/{image}',[ApiController::class,'imagesShow']);
-    Route::put('/api/v1/images/{image}',[ApiController::class,'imagesPut']);
+    Route::get('/api/v1/images/{id}',[ApiController::class,'imagesShow']);
+    Route::put('/api/v1/images/{id}',[ApiController::class,'imagesPut']);
     Route::delete('/api/v1/images/{id}',[ApiController::class,'imagesDelete']);
 
     // Analytics

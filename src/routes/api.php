@@ -20,6 +20,10 @@ Route::put('/api/v1/content/batch',[ApiController::class, 'contentBatchPut']);
 // ------------------ MESSAGES
 Route::post('/api/v1/messages',[ApiController::class,'messagesPost']);
 
+// ------------------ EMAILS
+Route::post('/api/v1/emails',[ApiController::class,'emailsPost']);
+
+
 
 
 
@@ -64,7 +68,6 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     // Emails
     Route::get('/api/v1/emails',[ApiController::class,'emailsGet']);
     Route::get('/api/v1/emails/{id}',[ApiController::class,'emailsGetSingle']);
-    Route::post('/api/v1/emails',[ApiController::class,'emailsPost']);
     Route::delete('/api/v1/emails/{id}',[ApiController::class,'emailsDelete']);
 
     // Images

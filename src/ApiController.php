@@ -285,13 +285,13 @@ class ApiController extends Controller
 
         $post = Post::find($id);
 
-        $post->author = $fields['author'];
+        $post->author = $fields['author'] ? $fields['author'] : '';
         $post->title = $fields['title'];
         $post->subtitle = $fields['subtitle'];
         $post->summary = $fields['summary'];
         $post->content = $fields['content'];
         $post->alt_field1 = $fields['alt_field1'];
-        $post->metadata = $fields['metadata'];
+        $post->metadata = $fields['metadata'] ? $fields['metadata'] : [];
         $post->featured_image_id = $fields['featured_image_id'];
         $post->published_at = $fields['published_at'];
 

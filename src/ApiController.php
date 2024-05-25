@@ -14,6 +14,8 @@ use Arostech\Models\Processedanalytic;
 use Arostech\Models\Request as ModelsRequest;
 use Arostech\Models\Testimonial;
 use Arostech\Models\User;
+use Arostech\Models\Post;
+use Arostech\Models\Category;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -238,13 +240,94 @@ class ApiController extends Controller
         return response(Post::all());
     }
 
-    public function postsGetId(Post $post){
-        return reponse($post);
+    public function postsGetId($id){
+        $post = Post::find($id);
+        return response($post);
     }
 
-    public function postsDelete(Post $post){
-        $post->delete();
-        return response('Post successfully deleted',200);
+    public function postsPost(Request $request){
+        $fields = $request->validate([
+            'user_id' => 'integer|required',
+            'author' => 'string',
+            'title' => 'string|required',
+            'subtitle' => 'string|required',
+            'summary' => 'string|required',
+            'content' => 'string|required',
+            'alt_field1' => 'string|required',
+            'metadata' => 'json',
+            'view_count' => 'integer',
+            'featured_image_id' => 'integer',
+            'slug' => 'string|required',
+            'published_at' => 'required|date'
+        ]);
+
+        $post = Post::create($fields);
+
+        if($post){
+            return response($post,200);
+        } else {
+            return response('Error making post',500);
+        }
+    }
+
+    public function postsPut($id, Request $request){
+        $fields = $request->validate([
+            'author' => 'string',
+            'title' => 'string|required',
+            'subtitle' => 'string|required',
+            'summary' => 'string|required',
+            'content' => 'string|required',
+            'alt_field1' => 'string|required',
+            'metadata' => 'json',
+            'featured_image_id' => 'integer',
+            'published_at' => 'required|date'
+        ]);
+
+        $post = Post::find($id);
+
+        $post->author = $fields['author'];
+        $post->title = $fields['title'];
+        $post->subtitle = $fields['subtitle'];
+        $post->summary = $fields['summary'];
+        $post->content = $fields['content'];
+        $post->alt_field1 = $fields['alt_field1'];
+        $post->metadata = $fields['metadata'];
+        $post->featured_image_id = $fields['featured_image_id'];
+        $post->published_at = $fields['published_at'];
+
+
+        if($post->save()){
+            return response($post,200);
+        } else {
+            return response('Error updating post',500);
+        }
+    }
+
+    public function postsDelete($id){
+        $post = Post::find($id);
+        if($post->delete()){
+            return response('Post successfully deleted',200);
+        }
+        else {
+            return response('Error deleting post',500);
+        }
+    }
+
+    public function postsSyncCategories($postId, Request $request){
+        $categories = $request->validate([
+            'categories' => 'array|required'
+        ]);
+
+        $post = Post::find($postId);
+
+        if($post->categories()->sync($categories)){
+            return response($post,200);
+        } else{
+            return response('Error adding category in controller',500);
+        }
+
+        
+
     }
 
 

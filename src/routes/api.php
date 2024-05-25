@@ -23,7 +23,9 @@ Route::post('/api/v1/messages',[ApiController::class,'messagesPost']);
 // ------------------ EMAILS
 Route::post('/api/v1/emails',[ApiController::class,'emailsPost']);
 
-
+// ------------------ POSTS
+Route::get('/api/v1/posts',[ApiController::class, 'postsGet']);
+Route::get('/api/v1/posts/{id}',[ApiController::class, 'postsGetId']);
 
 
 
@@ -45,11 +47,12 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::delete('/api/v1/content/{id}',[ApiController::class,'contentDelete']);
 
     // Posts
-    Route::get('/api/v1/posts',[ApiController::class, 'postsGet']);
-    Route::get('/api/v1/posts/{id}',[ApiController::class, 'postsGetId']);
     Route::post('/api/v1/posts',[ApiController::class,'postsPost']);
+    Route::post('/api/v1/posts/{id}/sync-categories',[ApiController::class,'postsSyncCategories']);
     Route::put('/api/v1/posts/{id}',[ApiController::class, 'postsPut']);    
     Route::delete('/api/v1/posts/{id}',[ApiController::class,'postsDelete']);
+
+    
 
 
     // Messages

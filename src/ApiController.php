@@ -278,7 +278,7 @@ class ApiController extends Controller
             'summary' => 'string|required',
             'content' => 'string|required',
             'alt_field1' => 'string|required',
-            'metadata' => 'json',
+            'metadata' => 'json|required',
             'featured_image_id' => 'integer',
             'published_at' => 'required|date'
         ]);
@@ -291,7 +291,7 @@ class ApiController extends Controller
         $post->summary = $fields['summary'];
         $post->content = $fields['content'];
         $post->alt_field1 = $fields['alt_field1'];
-        $post->metadata = $fields['metadata'] ? $fields['metadata'] : [];
+        $post->metadata = $fields['metadata'];
         $post->featured_image_id = $fields['featured_image_id'];
         $post->published_at = $fields['published_at'];
 

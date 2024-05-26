@@ -237,11 +237,12 @@ class ApiController extends Controller
     // -------------------------------------------- POSTS ---------------------------------------------
     // -------------------------------------------- POSTS ---------------------------------------------
     public function postsGet(){
-        return response(Post::all());
+        return response(Post::with('categories')->get());
     }
 
     public function postsGetId($id){
         $post = Post::find($id);
+        $post->categories;
         return response($post);
     }
 

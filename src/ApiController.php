@@ -387,7 +387,7 @@ class ApiController extends Controller
 
         $fields = $request->validate([
             'name' => 'required|string',
-            'parent_id' => 'required' //pass in null if it is a root category
+            'parent_id' => 'integer'
         ]);
 
         $category = Category::find($id);
@@ -396,7 +396,7 @@ class ApiController extends Controller
         }
 
         $category->name = $fields['name'];
-        $category->parent_id = $fields['parent_id'];
+        $category->parent_id = $fields['parent_id'] ?? null;
         
 
         if($category->save()){

@@ -329,15 +329,17 @@ class ApiController extends Controller
 
     public function postsAttachCategories($postId, Request $request){
         $fields = $request->validate([
-            'categories' => 'array|required'
+            'category' => 'integer|required'
         ]);
 
         $post = Post::find($postId);
 
-        if($post->categories()->attach($fields['categories'])){
-            return response($post,200);
-        } else{
-            return response('Error adding category in controller',500);
+        try {
+            if($post->categories()->attach($fields['category'])){
+                return response($post,200);
+            } 
+        } catch (\Throwable $th) {
+            return response('Error adding category in controller. Error: '.$th,500);
         }
     }
 

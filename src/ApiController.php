@@ -320,8 +320,9 @@ class ApiController extends Controller
         ]);
 
         $post = Post::find($postId);
-
+        
         if($post->categories()->sync($fields['categories'])){
+            $post->categories;
             return response($post,200);
         } else{
             return response('Error adding category in controller',500);
@@ -337,6 +338,7 @@ class ApiController extends Controller
 
         try {
             if($post->categories()->attach($fields['category'])){
+                $post->categories;
                 return response($post,200);
             } 
         } catch (\Throwable $th) {
@@ -352,6 +354,7 @@ class ApiController extends Controller
         $post = Post::find($postId);
 
         if($post->categories()->detach($fields['categories'])){
+            $post->categories;
             return response($post,200);
         } else{
             return response('Error adding category in controller',500);
@@ -364,11 +367,13 @@ class ApiController extends Controller
     // -------------------------------------------- CATEGORIES ---------------------------------------------
 
     public function categoriesGet(){
-        return response(Category::all());
+        return response(Category::with('posts')->get());
     }
 
     public function categoriesGetId($id){
-        return response(Category::find($id));
+        $category = Category::find($id);
+        $category->posts;
+        return response($category,200);
     }
 
     public function categoriesPost(Request $request){

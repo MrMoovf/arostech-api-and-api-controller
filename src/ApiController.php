@@ -396,7 +396,7 @@ class ApiController extends Controller
         }
 
         $category->name = $fields['name'];
-        if($fields['parent_id']){
+        if(array_key_exists('parent_id',$fields)){
             $category->parent_id = $fields['parent_id'];
         }
         

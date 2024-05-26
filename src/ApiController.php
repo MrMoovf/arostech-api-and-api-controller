@@ -314,21 +314,115 @@ class ApiController extends Controller
     }
 
     public function postsSyncCategories($postId, Request $request){
-        $categories = $request->validate([
+        $fields = $request->validate([
             'categories' => 'array|required'
         ]);
 
         $post = Post::find($postId);
 
-        if($post->categories()->sync($categories)){
+        if($post->categories()->sync($fields['categories'])){
             return response($post,200);
         } else{
             return response('Error adding category in controller',500);
         }
+    }
 
+    public function postsAttachCategories($postId, Request $request){
+        $fields = $request->validate([
+            'categories' => 'array|required'
+        ]);
+
+        $post = Post::find($postId);
+
+        if($post->categories()->attach($fields['categories'])){
+            return response($post,200);
+        } else{
+            return response('Error adding category in controller',500);
+        }
+    }
+
+    public function postsDetachCategories($postId, Request $request){
+        $fields = $request->validate([
+            'categories' => 'array|required'
+        ]);
+
+        $post = Post::find($postId);
+
+        if($post->categories()->detach($fields['categories'])){
+            return response($post,200);
+        } else{
+            return response('Error adding category in controller',500);
+        }
+    }
+
+    // -------------------------------------------- CATEGORIES ---------------------------------------------
+    // -------------------------------------------- CATEGORIES ---------------------------------------------
+    // -------------------------------------------- CATEGORIES ---------------------------------------------
+    // -------------------------------------------- CATEGORIES ---------------------------------------------
+
+    public function categoriesGet(){
+        return response(Category::all());
+    }
+
+    public function categoriesGetId($id){
+        return response(Category::find($id));
+    }
+
+    public function categoriesPost(Request $request){
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'parent_id' => 'required' //pass in null if it is a root category
+        ]);
+
+        $category = Category::create($fields);
+
+        if($category){
+            return response($category,201);
+        } else {
+            return response('Error making category in controller',500);
+        }
+    }
+
+    public function categoriesPut($id, Request $request){
+
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'parent_id' => 'required' //pass in null if it is a root category
+        ]);
+
+        $category = Category::find($id);
+        if(!$category){
+            return response('Bad request. Could not find category',404);
+        }
+
+        $category->name = $fields['name'];
+        $category->parent_id = $fields['parent_id'];
+        
+
+        if($category->save()){
+            return response($category,201);
+        } else {
+            return response('Error updating category in controller',500);
+        }
+    }
+
+    public function categoriesDelete($id){
+        $category = Category::find($id);
+
+        if(!$category){
+            return response('Bad request. Could not find category',404);
+        }
+
+        if($category->delete()){
+            return response('Category deleted successfully',200);
+        } else {
+            return response('Error deleting category in controller',500);
+        }
         
 
     }
+
+
 
 
     // -------------------------------------------- EMAILS ---------------------------------------------
@@ -338,6 +432,7 @@ class ApiController extends Controller
     public function emailsGet(){
         return response(Emailsubscriber::all());
     }
+
     public function emailsGetSingle($id){
         return response(Emailsubscriber::find($id));
     }

@@ -27,6 +27,10 @@ Route::post('/api/v1/emails',[ApiController::class,'emailsPost']);
 Route::get('/api/v1/posts',[ApiController::class, 'postsGet']);
 Route::get('/api/v1/posts/{id}',[ApiController::class, 'postsGetId']);
 
+// ------------------ CATEGORIES
+Route::get('/api/v1/categories',[ApiController::class,'categoriesGet']);
+Route::get('/api/v1/categories/{id}',[ApiController::class,'categoriesGetId']);
+
 
 
 
@@ -48,11 +52,16 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
 
     // Posts
     Route::post('/api/v1/posts',[ApiController::class,'postsPost']);
-    Route::post('/api/v1/posts/{id}/sync-categories',[ApiController::class,'postsSyncCategories']);
     Route::put('/api/v1/posts/{id}',[ApiController::class, 'postsPut']);    
     Route::delete('/api/v1/posts/{id}',[ApiController::class,'postsDelete']);
+    Route::post('/api/v1/posts/{id}/sync-categories',[ApiController::class,'postsSyncCategories']);
+    Route::post('/api/v1/posts/{id}/attach-categories',[ApiController::class,'postsAttachCategories']);
+    Route::post('/api/v1/posts/{id}/detach-categories',[ApiController::class,'postsDetachCategories']);
 
-    
+    // Categories
+    Route::post('/api/v1/categories',[ApiController::class,'categoriesPost']);
+    Route::put('/api/v1/categories/{id}',[ApiController::class, 'categoriesPut']);    
+    Route::delete('/api/v1/categories/{id}',[ApiController::class,'categoriesDelete']);
 
 
     // Messages

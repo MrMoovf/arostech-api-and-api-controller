@@ -371,7 +371,7 @@ class ApiController extends Controller
     public function categoriesPost(Request $request){
         $fields = $request->validate([
             'name' => 'required|string',
-            'parent_id' => 'required' //pass in null if it is a root category
+            'parent_id' => 'integer'
         ]);
 
         $category = Category::create($fields);

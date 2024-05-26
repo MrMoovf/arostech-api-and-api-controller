@@ -396,7 +396,9 @@ class ApiController extends Controller
         }
 
         $category->name = $fields['name'];
-        $category->parent_id = $fields['parent_id'] ?? null;
+        if($fields['parent_id']){
+            $category->parent_id = $fields['parent_id'];
+        }
         
 
         if($category->save()){

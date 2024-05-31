@@ -244,7 +244,7 @@ class ApiController extends Controller
         $post = Post::find($id);
         $post->categories;
         // $post->image = Image::find($post->featured_image_id);
-        $post->featured_image;
+        $post->image;
         return response($post);
     }
 

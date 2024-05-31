@@ -263,13 +263,16 @@ class ApiController extends Controller
             'subtitle' => 'string|required',
             'summary' => 'string|required',
             'content' => 'string|required',
-            'alt_field1' => 'string|required',
-            'metadata' => 'json',
-            'view_count' => 'integer',
-            'featured_image_id' => 'integer',
+            'alt_field1' => 'string|required', //so far not used - default defined in PostController
+            'metadata' => 'json', //so far not used - default defined in PostController
+            'view_count' => 'integer', 
+            'featured_image_id' => 'integer', 
             'slug' => 'string|required',
             'published_at' => 'required|date'
         ]);
+
+        $postLatest = Post::latest()::first();
+        $fields['slug'] = $postLatest->id . $fields['slug'];
 
         $post = Post::create($fields);
 
@@ -287,8 +290,8 @@ class ApiController extends Controller
             'subtitle' => 'string|required',
             'summary' => 'string|required',
             'content' => 'string|required',
-            'alt_field1' => 'string|required',
-            'metadata' => 'json|required',
+            'alt_field1' => 'string|required', //so far not used - default defined in PostController
+            'metadata' => 'json|required', //so far not used - default defined in PostController
             'featured_image_id' => 'integer',
             'slug' => 'string',
             'published_at' => 'required|date'

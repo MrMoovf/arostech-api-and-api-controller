@@ -271,7 +271,7 @@ class ApiController extends Controller
             'published_at' => 'required|date'
         ]);
 
-        $postLatest = Post::latest()::first();
+        $postLatest = Post::latest()->first();
         $fields['slug'] = $postLatest->id . $fields['slug'];
 
         $post = Post::create($fields);

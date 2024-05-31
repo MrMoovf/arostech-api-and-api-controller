@@ -237,7 +237,7 @@ class ApiController extends Controller
     // -------------------------------------------- POSTS ---------------------------------------------
     // -------------------------------------------- POSTS ---------------------------------------------
     public function postsGet(){
-        return response(Post::with('categories')->get());
+        return response(Post::with('categories.featuredimage')->get());
     }
 
     public function postsGetId($id){
@@ -245,7 +245,12 @@ class ApiController extends Controller
         $post->categories;
         // $post->image = Image::find($post->featured_image_id);
         $post->featuredimage;
-        return response($post);
+        $images = Image::where('is_deleted',0)->get();
+        $res = [
+            'post' => $post,
+            'images' => $images
+        ];
+        return response($res);
     }
 
     public function postsPost(Request $request){

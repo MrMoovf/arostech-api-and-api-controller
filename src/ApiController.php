@@ -660,6 +660,10 @@ class ApiController extends Controller
         return response(User::find($id));
     }
 
+    public function usersGetAuthenticated(){
+        return response(Auth::user());
+    }
+
     // Register new user in users table
     public function usersPost(Request $request){
         $formFields = $request->validate([

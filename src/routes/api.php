@@ -40,6 +40,7 @@ Route::get('/api/v1/categories/{id}',[ApiController::class,'categoriesGetId']);
 Route::group(['middleware' => ['auth:sanctum']], function (){
     // Users
     Route::get('/api/v1/users',[ApiController::class,'usersGet']);
+    Route::get('/api/v1/users/authenticated-user',[ApiController::class,'usersGetAuthenticated']);
     Route::get('/api/v1/users/{id}',[ApiController::class,'usersGetSingle']);
     Route::post('/api/v1/logout',[ApiController::class,'logout']);
     Route::delete('/api/v1/users/{id}',[ApiController::class,'usersDelete']);

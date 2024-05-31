@@ -246,9 +246,11 @@ class ApiController extends Controller
         // $post->image = Image::find($post->featured_image_id);
         $post->featuredimage;
         $images = Image::where('is_deleted',0)->get();
+        $categories = Category::all();
         $res = [
             'post' => $post,
-            'images' => $images
+            'images' => $images,
+            'categories' => $categories
         ];
         return response($res);
     }

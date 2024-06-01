@@ -272,7 +272,12 @@ class ApiController extends Controller
         ]);
 
         $postLatest = Post::latest()->first();
-        $fields['slug'] = $postLatest->id + 1 . $fields['slug'];
+        if(!$postLatest){
+            $fields['slug'] = 1 . $fields['slug'];
+            
+        } else{
+            $fields['slug'] = $postLatest->id + 1 . $fields['slug'];
+        }
 
         $post = Post::create($fields);
 

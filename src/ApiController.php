@@ -308,6 +308,8 @@ class ApiController extends Controller
         $post->metadata = $fields['metadata'];
         if(key_exists('featured_image_id',$fields)){
             $post->featured_image_id = $fields['featured_image_id'];
+        } else {
+            $post->featured_image_id = null;
         }
         $post->slug = $fields['slug'];
         $post->published_at = $fields['published_at'];

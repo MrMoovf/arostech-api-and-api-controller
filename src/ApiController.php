@@ -351,7 +351,7 @@ class ApiController extends Controller
         }
     }
 
-    public function postsAttachCategories($postId, Request $request){
+    public function postsAttachCategory($postId, Request $request){
         $fields = $request->validate([
             'category' => 'integer|required'
         ]);

@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::put('/api/v1/posts/{id}',[ApiController::class, 'postsPut']);    
     Route::delete('/api/v1/posts/{id}',[ApiController::class,'postsDelete']);
     Route::post('/api/v1/posts/{id}/sync-categories',[ApiController::class,'postsSyncCategories']);
-    Route::post('/api/v1/posts/{id}/attach-category',[ApiController::class,'postsAttachCategories']);
+    Route::post('/api/v1/posts/{id}/attach-category',[ApiController::class,'postsAttachCategory']);
     Route::post('/api/v1/posts/{id}/detach-categories',[ApiController::class,'postsDetachCategories']);
 
     // Categories

@@ -401,6 +401,9 @@ class ApiController extends Controller
 
     public function categoriesGetId($id){
         $category = Category::find($id);
+        if(!$category){
+            return response('Category not found',404);
+        }
         $category->posts;
         return response($category,200);
     }
@@ -425,7 +428,8 @@ class ApiController extends Controller
 
         $fields = $request->validate([
             'name' => 'required|string',
-            'parent_id' => 'integer'
+            'parent_id' => 'integer',
+            'hexcolor' => 'string'
         ]);
 
         $category = Category::find($id);
@@ -437,6 +441,7 @@ class ApiController extends Controller
         if(array_key_exists('parent_id',$fields)){
             $category->parent_id = $fields['parent_id'];
         }
+        $category->hexcolor = $fields['hexcolor'];
         
 
         if($category->save()){

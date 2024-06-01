@@ -272,7 +272,7 @@ class ApiController extends Controller
         ]);
 
         $postLatest = Post::latest()->first();
-        $fields['slug'] = $postLatest->id . $fields['slug'];
+        $fields['slug'] = $postLatest->id + 1 . $fields['slug'];
 
         $post = Post::create($fields);
 
@@ -306,7 +306,9 @@ class ApiController extends Controller
         $post->content = $fields['content'];
         $post->alt_field1 = $fields['alt_field1'];
         $post->metadata = $fields['metadata'];
-        $post->featured_image_id = $fields['featured_image_id'];
+        if(key_exists('featured_image_id',$fields)){
+            $post->featured_image_id = $fields['featured_image_id'];
+        }
         $post->slug = $fields['slug'];
         $post->published_at = $fields['published_at'];
 
@@ -330,10 +332,14 @@ class ApiController extends Controller
 
     public function postsSyncCategories($postId, Request $request){
         $fields = $request->validate([
-            'categories' => 'array|required'
+            'categories' => 'array'
         ]);
 
         $post = Post::find($postId);
+
+        if(!key_exists('categories',$fields)){
+            return response('Bad request: No category specified in controller',403);
+        }
         
         if($post->categories()->sync($fields['categories'])){
             $post->categories;

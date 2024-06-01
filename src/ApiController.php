@@ -445,7 +445,9 @@ class ApiController extends Controller
         if(array_key_exists('parent_id',$fields)){
             $category->parent_id = $fields['parent_id'];
         }
-        $category->hexcolor = $fields['hexcolor'];
+        if(array_key_exists('hexcolor',$fields)){
+            $category->hexcolor = $fields['hexcolor'];
+        }
 
         if($category->id == $category->parent_id){
             return response('Error making category in controller',403);

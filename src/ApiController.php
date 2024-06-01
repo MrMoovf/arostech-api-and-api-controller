@@ -417,6 +417,10 @@ class ApiController extends Controller
 
         $category = Category::create($fields);
 
+        if($category->id == $category->parent_id){
+            return response('Error making category in controller',403);
+        }
+
         if($category){
             return response($category,201);
         } else {

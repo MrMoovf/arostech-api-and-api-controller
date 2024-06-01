@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/api/v1/posts/{id}/sync-categories',[ApiController::class,'postsSyncCategories']);
     Route::post('/api/v1/posts/{id}/attach-category',[ApiController::class,'postsAttachCategory']);
     Route::post('/api/v1/posts/{id}/detach-categories',[ApiController::class,'postsDetachCategories']);
+    Route::post('/api/v1/posts/{id}/clone',[ApiController::class,'postsClone']);
 
     // Categories
     Route::post('/api/v1/categories',[ApiController::class,'categoriesPost']);

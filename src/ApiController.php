@@ -388,6 +388,28 @@ class ApiController extends Controller
         }
     }
 
+    public function postsClone($id){
+        $existingPost = Post::find($id);
+        if(!$existingPost){
+            return response('Bad request: post not found.',400);
+        }
+        $newPost = $existingPost->replicate();
+        if(!$newPost){
+            return response('Server error: could not replicate.',500);
+
+        }
+        $newPost->published_at = '2099-01-01';
+
+        if(!$newPost->save()){
+            return response('Server error: could not save.',500);
+        }
+        
+        return response($newPost);
+
+
+
+    }
+
     // -------------------------------------------- CATEGORIES ---------------------------------------------
     // -------------------------------------------- CATEGORIES ---------------------------------------------
     // -------------------------------------------- CATEGORIES ---------------------------------------------

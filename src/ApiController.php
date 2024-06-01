@@ -273,10 +273,10 @@ class ApiController extends Controller
 
         $postLatest = Post::latest()->first();
         if(!$postLatest){
-            $fields['slug'] = 1 . $fields['slug'];
+            $fields['slug'] = 1 . '-' . $fields['slug'];
             
         } else{
-            $fields['slug'] = $postLatest->id + 1 . $fields['slug'];
+            $fields['slug'] = $postLatest->id + 1 . '-' . $fields['slug'];
         }
 
         $post = Post::create($fields);
@@ -403,7 +403,7 @@ class ApiController extends Controller
         if(!$newPost->save()){
             return response('Server error: could not save.',500);
         }
-        
+
         return response($newPost);
 
 

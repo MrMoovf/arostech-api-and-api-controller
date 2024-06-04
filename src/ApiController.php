@@ -237,7 +237,7 @@ class ApiController extends Controller
     // -------------------------------------------- POSTS ---------------------------------------------
     // -------------------------------------------- POSTS ---------------------------------------------
     public function postsGet(){
-        $now = time();
+        $now = date('Y-m-d');
         $posts = Post::with('categories','featuredimage')->where('published_at','<',$now) ->get();
         return response($posts);
     }

@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/api/v1/posts/{id}/attach-category',[ApiController::class,'postsAttachCategory']);
     Route::post('/api/v1/posts/{id}/detach-categories',[ApiController::class,'postsDetachCategories']);
     Route::post('/api/v1/posts/{id}/clone',[ApiController::class,'postsClone']);
-    Route::get('/api/v1/posts/all-also-unpublished',[ApiController::class,'postsGetAllAlsoUnpublished']);
+    Route::get('/api/v1/posts/all/also-unpublished',[ApiController::class,'postsGetAllAlsoUnpublished']);
 
 
     

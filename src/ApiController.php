@@ -405,7 +405,7 @@ class ApiController extends Controller
             return response('Server error: could not replicate.',500);
 
         }
-        $newPost->published_at = '2099-01-01';
+        $newPost->published_at = '2099-01-01 18:41:17';
 
         if(!$newPost->save()){
             return response('Server error: could not save.',500);

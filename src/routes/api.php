@@ -34,6 +34,7 @@ Route::get('/api/v1/categories/{id}',[ApiController::class,'categoriesGetId']);
 
 
 
+
 // ------------------------- Protected routes ----------------------
 // ------------------------- Protected routes ----------------------
 // ------------------------- Protected routes ----------------------

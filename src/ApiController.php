@@ -423,7 +423,7 @@ class ApiController extends Controller
     // -------------------------------------------- CATEGORIES ---------------------------------------------
 
     public function categoriesGet(){
-        $categories = Category::tree()->get()->toTree();
+        $categories = Category::tree()->with('posts.categories','posts.featuredimage')->get()->toTree();
         // return response(Category::with('posts')->get());
         return response($categories);
     }

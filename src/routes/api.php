@@ -102,4 +102,10 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     // Processed analytics
     Route::get('/api/v1/processed-analytics',[ApiController::class,'processedAnalyticsGet']);
 
+
+    // Pages
+    Route::get('/api/v1/pages/{id}',[ApiController::class, 'pagesGetSingle']);
+    Route::post('/api/v1/pages',[ApiController::class, 'pagesPost']);
+    Route::post('/api/v1/pages/add-relationship',[ApiController::class, 'pagesAddRelationship']);
+
 });

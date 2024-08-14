@@ -16,6 +16,7 @@ use Arostech\Models\Testimonial;
 use Arostech\Models\User;
 use Arostech\Models\Post;
 use Arostech\Models\Category;
+use Arostech\Models\Page;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -936,6 +937,61 @@ class ApiController extends Controller
         return Processedanalytic::latest()->first();
     }
 
+
+    // -------------------------------------------- PAGES  ---------------------------------------------
+    // -------------------------------------------- PAGES  ---------------------------------------------
+    // -------------------------------------------- PAGES  ---------------------------------------------
+    // -------------------------------------------- PAGES  ---------------------------------------------
+    public function pagesGetSingle($id){
+        return Page::find($id);
+    }
+
+    public function pagesPost(Request $request){
+        $fields = $request->validate([
+            'name' => 'required|string'
+        ]);
+
+        $page = Page::create($fields);
+        if($page){
+            return response($page,200);
+        } else {
+            return response('Error on creating page');
+        }
+    }
+
+    public function pagesAddRelationship(Request $request){
+        $fields = $request->validate([
+            'page_id' => 'integer|required',
+            'model_id' => 'integer|required',
+            'table_name' => 'string|required'
+        ]);
+
+        $page = Page::find($fields['page_id']);
+        switch ($fields['table_name']) {
+            case 'contents':
+                $page->contents()->attach($fields['model_id']);
+                break;
+            
+            case 'images':
+                $page->images()->attach($fields['model_id']);
+                break;
+
+            case 'categories':
+                $page->categories()->attach($fields['model_id']);
+                break;
+
+            case 'posts':
+                $page->posts()->attach($fields['model_id']);
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+        return response($page);
+
+    }
 
 
     // ------------------------------ HELPERS ----------------------------------------

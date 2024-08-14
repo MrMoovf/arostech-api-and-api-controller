@@ -943,7 +943,8 @@ class ApiController extends Controller
     // -------------------------------------------- PAGES  ---------------------------------------------
     // -------------------------------------------- PAGES  ---------------------------------------------
     public function pagesGetSingle($id){
-        return Page::find($id);
+        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
+        return $page;
     }
 
     public function pagesPost(Request $request){
@@ -967,6 +968,7 @@ class ApiController extends Controller
         ]);
 
         $page = Page::find($fields['page_id']);
+        
         switch ($fields['table_name']) {
             case 'contents':
                 $page->contents()->attach($fields['model_id']);

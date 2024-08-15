@@ -990,7 +990,7 @@ class ApiController extends Controller
                 # code...
                 break;
         }
-
+        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
         return response($page);
 
     }

@@ -942,6 +942,11 @@ class ApiController extends Controller
     // -------------------------------------------- PAGES  ---------------------------------------------
     // -------------------------------------------- PAGES  ---------------------------------------------
     // -------------------------------------------- PAGES  ---------------------------------------------
+    
+    public function pagesGet(){
+        return Page::all();
+    }
+
     public function pagesGetSingle($id){
         $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
         return $page;

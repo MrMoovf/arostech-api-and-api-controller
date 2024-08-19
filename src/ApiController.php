@@ -944,12 +944,13 @@ class ApiController extends Controller
     // -------------------------------------------- PAGES  ---------------------------------------------
     
     public function pagesGet(){
-        return Page::all();
+        $page = Page::with('contents','images','categories.posts','posts')->get();
+        return response($page,200);
     }
 
     public function pagesGetSingle($id){
         $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
-        return $page;
+        return response($page,200);
     }
 
     public function pagesPost(Request $request){
@@ -964,6 +965,33 @@ class ApiController extends Controller
             return response('Error on creating page');
         }
     }
+
+    public function pagesPut($id, Request $request){
+        $fields = $request->validate([
+            'name' => 'string|required'
+        ]);
+
+        $page = Page::find($id);
+
+        $page->name = $fields['name'];
+        if(!$page->save()){
+            return response('Error updating page',500);
+        }
+        
+        return response($page,200);
+    }
+
+    public function pagesDelete($id){
+
+        $page = Page::find($id);
+        $isDeleted = $page->destroy();
+        if(!$isDeleted){
+            return response('Error deleting page',500);
+        }
+        
+        return response('Success. 0 is error and 1 is succces. Page is: '. $isDeleted,200);
+    }
+
 
     public function pagesAddRelationship(Request $request){
         $fields = $request->validate([
@@ -997,6 +1025,82 @@ class ApiController extends Controller
         }
         $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
         return response($page);
+
+    }
+
+    public function pagesRemoveRelationship(Request $request){
+        $fields = $request->validate([
+            'page_id' => 'integer|required',
+            'model_id' => 'integer|required',
+            'table_name' => 'string|required'
+        ]);
+
+        $page = Page::find($fields['page_id']);
+        
+        try {
+            switch ($fields['table_name']) {
+                case 'contents':
+                    $page->contents()->detach($fields['model_id']);
+                    break;
+                
+                case 'images':
+                    $page->images()->detach($fields['model_id']);
+                    break;
+    
+                case 'categories':
+                    $page->categories()->detach($fields['model_id']);
+                    break;
+    
+                case 'posts':
+                    $page->posts()->detach($fields['model_id']);
+                    break;
+    
+                default:
+                    # code...
+                    break;
+            }
+            $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
+            return response($page);
+        } catch (\Throwable $th) {
+            return response('Error on removing the relationship: '.$th, 500);
+        }
+
+    }
+
+    
+    public function pagesSyncRelationship(Request $request){
+        $fields = $request->validate([
+            'page_id' => 'integer|required',
+            'data' => 'required|array',
+        ]);
+
+        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
+
+        
+        try {
+            foreach ($fields['data'] as $dataObject) {
+                if($dataObject['name'] == 'content'){
+                    $page->contents()->sync($dataObject['ids']);
+                }
+    
+                if($dataObject['name'] == 'images'){
+                    $page->contents()->sync($dataObject['ids']);
+                }
+    
+                if($dataObject['name'] == 'categories'){
+                    $page->contents()->sync($dataObject['ids']);
+                }
+    
+                if($dataObject['name'] == 'posts'){
+                    $page->contents()->sync($dataObject['ids']);
+                }
+            }
+            
+            
+            return response($page);
+        } catch (\Throwable $th) {
+            return response('Error on syncing the relationship: '.$th, 500);
+        }
 
     }
 

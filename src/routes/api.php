@@ -106,9 +106,11 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     // Pages
     Route::get('/api/v1/pages',[ApiController::class, 'pagesGet']);
     Route::get('/api/v1/pages/{id}',[ApiController::class, 'pagesGetSingle']);
-    Route::put('/api/v1/pages/{id}',[ApiController::class, 'pagesPut']);
     Route::post('/api/v1/pages',[ApiController::class, 'pagesPost']);
+    Route::put('/api/v1/pages/{id}',[ApiController::class, 'pagesPut']);
+    Route::delete('/api/v1/pages/{id}',[ApiController::class, 'pagesDelete']);
     Route::post('/api/v1/pages/add-relationship',[ApiController::class, 'pagesAddRelationship']);
-    Route::delete('/api/v1/pages/{id}',[ApiController::class, 'pagesPut']);
+    Route::post('/api/v1/pages/remove-relationship',[ApiController::class, 'pagesRemoveRelationship']);
+    Route::post('/api/v1/pages/sync-relationship',[ApiController::class, 'pagesSyncRelationship']);
 
 });

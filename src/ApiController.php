@@ -1067,7 +1067,6 @@ class ApiController extends Controller
 
     }
 
-    
     public function pagesSyncRelationship(Request $request){
         $fields = $request->validate([
             'page_id' => 'integer|required',
@@ -1080,7 +1079,7 @@ class ApiController extends Controller
         try {
             foreach ($fields['data'] as $dataObject) {
                 switch ($dataObject['name']) {
-                    case 'content':
+                    case 'contents':
                         # code...
                         $page->contents()->sync($dataObject['ids']);
                         break;

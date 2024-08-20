@@ -1082,7 +1082,6 @@ class ApiController extends Controller
             foreach ($fields['data'] as $dataObject) {
                 switch ($dataObject['name']) {
                     case 'contents':
-                        # code...
                         $page->contents()->sync($dataObject['ids']);
                         break;
 
@@ -1095,7 +1094,7 @@ class ApiController extends Controller
                         break;
 
                     case 'posts':
-                        $page->contents()->sync($dataObject['ids']);
+                        $page->posts()->sync($dataObject['ids']);
                         break;
                     
                     default:

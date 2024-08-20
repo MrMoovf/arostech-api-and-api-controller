@@ -1000,31 +1000,36 @@ class ApiController extends Controller
             'table_name' => 'string|required'
         ]);
 
-        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
+        $page = Page::find($fields['page_id']);
 
         
-        switch ($fields['table_name']) {
-            case 'contents':
-                $page->contents()->attach($fields['model_id']);
-                break;
-            
-            case 'images':
-                $page->images()->attach($fields['model_id']);
-                break;
-
-            case 'categories':
-                $page->categories()->attach($fields['model_id']);
-                break;
-
-            case 'posts':
-                $page->posts()->attach($fields['model_id']);
-                break;
-
-            default:
-                # code...
-                break;
+        try {
+            switch ($fields['table_name']) {
+                case 'contents':
+                    $page->contents()->attach($fields['model_id']);
+                    break;
+                
+                case 'images':
+                    $page->images()->attach($fields['model_id']);
+                    break;
+    
+                case 'categories':
+                    $page->categories()->attach($fields['model_id']);
+                    break;
+    
+                case 'posts':
+                    $page->posts()->attach($fields['model_id']);
+                    break;
+    
+                default:
+                    break;
+            }
+        } catch (\Throwable $th) {
+            response('Error adding relationship: '.$th,500);
         }
-        return response($page);
+        $pageWithRelations = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
+
+        return response($pageWithRelations);
 
     }
 
@@ -1035,8 +1040,7 @@ class ApiController extends Controller
             'table_name' => 'string|required'
         ]);
 
-        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
-        
+        $page = Page::find($fields['page_id']);
         try {
             switch ($fields['table_name']) {
                 case 'contents':
@@ -1058,7 +1062,8 @@ class ApiController extends Controller
                 default:
                     break;
             }
-            return response($page);
+            $pageWithRelations = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
+            return response($pageWithRelations);
         } catch (\Throwable $th) {
             return response('Error on removing the relationship: '.$th, 500);
         }
@@ -1071,9 +1076,8 @@ class ApiController extends Controller
             'data' => 'required|array',
         ]);
 
-        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
 
-        
+        $page = Page::find($fields['page_id']);
         try {
             foreach ($fields['data'] as $dataObject) {
                 switch ($dataObject['name']) {
@@ -1099,7 +1103,8 @@ class ApiController extends Controller
                 }
             }
             
-            return response($page);
+            $pageWithRelations = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
+            return response($pageWithRelations);
         } catch (\Throwable $th) {
             return response('Error on syncing the relationship: '.$th, 500);
         }

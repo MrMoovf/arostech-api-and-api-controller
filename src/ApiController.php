@@ -1095,7 +1095,7 @@ class ApiController extends Controller
 
                     case 'posts':
                         $page->posts()->sync($dataObject['ids']);
-                        break;
+                        break; 
                     
                     default:
                         break;

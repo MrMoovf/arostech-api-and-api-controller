@@ -984,7 +984,7 @@ class ApiController extends Controller
     public function pagesDelete($id){
 
         $page = Page::find($id);
-        $isDeleted = $page->destroy();
+        $isDeleted = $page->delete();
         if(!$isDeleted){
             return response('Error deleting page',500);
         }
@@ -1000,7 +1000,8 @@ class ApiController extends Controller
             'table_name' => 'string|required'
         ]);
 
-        $page = Page::find($fields['page_id']);
+        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
+
         
         switch ($fields['table_name']) {
             case 'contents':
@@ -1023,7 +1024,6 @@ class ApiController extends Controller
                 # code...
                 break;
         }
-        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
         return response($page);
 
     }
@@ -1035,7 +1035,7 @@ class ApiController extends Controller
             'table_name' => 'string|required'
         ]);
 
-        $page = Page::find($fields['page_id']);
+        $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$fields['page_id'])->get();
         
         try {
             switch ($fields['table_name']) {
@@ -1056,10 +1056,8 @@ class ApiController extends Controller
                     break;
     
                 default:
-                    # code...
                     break;
             }
-            $page = Page::with('contents','images','categories.posts','posts')->where('id','=',$id)->get();
             return response($page);
         } catch (\Throwable $th) {
             return response('Error on removing the relationship: '.$th, 500);

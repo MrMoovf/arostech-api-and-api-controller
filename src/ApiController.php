@@ -1079,23 +1079,28 @@ class ApiController extends Controller
         
         try {
             foreach ($fields['data'] as $dataObject) {
-                if($dataObject['name'] == 'content'){
-                    $page->contents()->sync($dataObject['ids']);
-                }
-    
-                if($dataObject['name'] == 'images'){
-                    $page->contents()->sync($dataObject['ids']);
-                }
-    
-                if($dataObject['name'] == 'categories'){
-                    $page->contents()->sync($dataObject['ids']);
-                }
-    
-                if($dataObject['name'] == 'posts'){
-                    $page->contents()->sync($dataObject['ids']);
+                switch ($dataObject['name']) {
+                    case 'content':
+                        # code...
+                        $page->contents()->sync($dataObject['ids']);
+                        break;
+
+                    case 'images':
+                        $page->images()->sync($dataObject['ids']);
+                        break;
+                    
+                    case 'categories':
+                        $page->categories()->sync($dataObject['ids']);
+                        break;
+
+                    case 'posts':
+                        $page->contents()->sync($dataObject['ids']);
+                        break;
+                    
+                    default:
+                        break;
                 }
             }
-            
             
             return response($page);
         } catch (\Throwable $th) {

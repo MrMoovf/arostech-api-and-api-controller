@@ -86,12 +86,12 @@ class ApiController extends Controller
 
     }
 
-    // Update content with ID
+    // Update content with ID 
     public function contentPut($id, Request $request){
         $id = Content::find($id);
         // Få  _post fields
         $formFields = $request->validate([
-            'img' => 'required',
+            'img' => 'required', 
             'data' => 'required',
             'page' => 'required',
             'title' => 'required',
